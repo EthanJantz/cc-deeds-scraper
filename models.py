@@ -24,7 +24,7 @@ class Document(Base):
     address: Mapped[Optional[str]] = mapped_column(String(255))
     doc_type: Mapped[str] = mapped_column(String(50))
     consideration_amount: Mapped[Optional[str]] = mapped_column(String(50))
-    pdf_url: Mapped[str] = mapped_column(String(2048))
+    pdf_url: Mapped[Optional[str]] = mapped_column(String(2048))
 
     def __repr__(self) -> str:
         return f"Document(doc_num={self.doc_num!r}, pin={self.pin!r}, date_executed={self.date_executed!r}, \
@@ -80,7 +80,7 @@ class PriorDoc(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     doc_num: Mapped[str] = mapped_column(ForeignKey("documents.doc_num"))
-    prior_doc_num: Mapped[str] = mapped_column(ForeignKey("documents.doc_num"))
+    prior_doc_num: Mapped[str] = mapped_column(String(255))
 
     def __repr__(self) -> str:
         return f"PriorDoc(id={self.id!r}, doc_num={self.doc_num!r}, prior_doc_num={self.prior_doc_num!r})"
